@@ -23,20 +23,21 @@ async function createProduct(req, res) {
 async function getProductByID(req, res) {
   console.log("data", req.params);
   try {
-    const productID = req.params.productID;
-
-    const product = await productService.getProductByID(productID);
-    console.log("product", product);
-    if (!product) {
+    if (typeof product != "undefined") {
+      const productID = req.params.productID;
+      const product = await productService.getProductByID(productID);
+      console.log("product", typeof product);
+      res.json(product);
+    } else {
       return res
         .status(404)
         .json({ error: "Product with given ID Not Found." });
     }
-    res.json(product);
   } catch (error) {
     console.error("Error fetching product by ID ", error.message);
+
     res.status(500).json({
-      error: "Product with given ID not found.",
+      error: "Internal Server Error.",
     });
   }
 }
