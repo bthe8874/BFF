@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const productRouter = require("../BFF/routes/productRouter");
+const userRouter = require("./routes/userRoutes")
 
 const app = express();
 
@@ -15,6 +16,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use("/", productRouter);
+app.use("/",userRouter);
 
 const port = 3001;
 const server = app.listen(port, () => {
