@@ -1,8 +1,10 @@
 const axios = require("axios");
 const servicesConfig = require("../apiInstances/apiInstance");
 
+
 async function getAllUsers() {
   try {
+    console.log("controller User fetching successful!");
     const response = await axios.get(servicesConfig.userServiceEndpoint);
     console.log("success");
     return response.data;
