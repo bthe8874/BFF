@@ -8,7 +8,7 @@ authMiddleware.initializeCognito();
 async function loginUser(req, res) {
   // Authenticate user using middleware
   await authMiddleware.authenticateUser(req, res, async () => {
-    try {2
+    try {
       // User authenticated successfully
       // Call userService functions to fetch user data or perform other operations
       const userData = await userService.getUserByEmail(req.body.email);

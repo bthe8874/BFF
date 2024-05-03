@@ -1,20 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const axios = require('axios');
+const orderController = require("../controller/orderController");
+const authMiddleware = require('../middleware/authMiddleware');
 
-router.get("/orders",  (req, res) => {
-  try {
-    const productResponse = await axios.get(
-      `http://localhost:8020/api/orders`
-    ); 
 
-    res.send(productResponse.responseData)
-
-    res.json(responseData);
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+router.post("/order/create",authMiddleware.checkAuthentication, orderController.createOrder);
+router.get("/order/get/:userID",orderController.getOrderByUserID);
 
 module.exports = router;
